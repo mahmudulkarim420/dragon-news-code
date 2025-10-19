@@ -1,13 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { FaStar, FaEye, FaRegBookmark, FaShareAlt } from 'react-icons/fa';
 import { Link } from 'react-router';
 
 const NewsCard = ({ news }) => {
-  const { id, title, thumbnail_url, details, author, rating, total_view } = news;
-
-  const [isExpanded, setIsExpanded] = useState(false);
-
-  const toggleReadMore = () => setIsExpanded(!isExpanded);
+  const { id, title, thumbnail_url, details, author, rating, total_view } =
+    news;
 
   const formatDate = (dateStr) => {
     const date = new Date(dateStr);
@@ -54,14 +51,13 @@ const NewsCard = ({ news }) => {
       />
 
       <div className="px-4 py-3 text-sm text-gray-600">
-        {isExpanded ? details : `${details.slice(0, 150)}...`}
+        {details.length > 150 ? `${details.slice(0, 150)}...` : details}
         {details.length > 150 && (
           <Link
-          to={`/newsDetails/${id}`}
-            onClick={toggleReadMore}
-            className="ml-2 text-yellow-500 font-semibold hover:underline"
+            to={`/newsDetails/${id}`}
+            className="ml-2 text-yellow-600 font-semibold hover:underline"
           >
-            {isExpanded ? 'Read Less' : 'Read More'}
+            Read More
           </Link>
         )}
       </div>
